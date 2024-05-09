@@ -9,7 +9,7 @@ global $DB, $USER;
 $selected_status   = optional_param('selected_status', null, PARAM_INT); 
 
 if ($selected_status ==-1) { 
-  $sql = "SELECT id, fullname, idnumber FROM {course} WHERE id !=1";
+  $sql = "SELECT id, fullname, idnumber FROM {course} WHERE id !=?";
 
 } else { 
     $sql = "SELECT id, fullname, idnumber FROM {course} WHERE id !=1 AND VISIBLE = $selected_status";
