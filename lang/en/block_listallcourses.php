@@ -25,9 +25,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['course_id'] = 'Course ID';
+$string['course_name'] = 'Course Name';
 $string['pluginname'] = 'Listar todos os cursos';
 $string['pluginname_display'] = 'Cursos abaixo:';
 $string['srn'] = 'Sr N.';
-$string['course_name'] = 'Course Name';
-$string['course_id'] = 'Course ID';
 
+
+// <th>" . get_string('srn', 'block_listallcourses') . "</th>
+// <th>" . get_string('course_name', 'block_listallcourses') . "</th>
+// <th>" . get_string('course_id', 'block_listallcourses') . "</th>

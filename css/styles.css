@@ -1,0 +1,13 @@
+.block_listallcourses table td{
+  color: blue;
+}
+
+.block_listallcourses .header{
+  font-size: small;
+  color: rgb(0, 0, 0);
+}
+
+.block_listallcourses .header2{
+  font-size: larger;
+  color: blue;
+}

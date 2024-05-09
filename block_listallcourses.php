@@ -31,6 +31,7 @@ class block_listallcourses extends block_base
     {
         // Needed by Moodle to differentiate between blocks.
         $this->title = get_string('pluginname', 'block_listallcourses');
+
     }
 
     /**
@@ -41,7 +42,12 @@ class block_listallcourses extends block_base
     public function get_content()
     {
 
-        global $DB, $USER, $CFG;
+        global $DB, $USER, $CFG, $PAGE;
+
+        $PAGE->requires->js('/blocks/listallcourses/js/jquery-3.6.3.min.js');
+        $PAGE->requires->js('/blocks/listallcourses/js/main.js');
+        $PAGE->requires->css('/blocks/listallcourses/css/styles.css');
+
 
         if ($this->content !== null) {
             return $this->content;
@@ -58,16 +64,18 @@ class block_listallcourses extends block_base
         $this->content->footer = '';
 
         if (!empty($this->config->text)) {
-            $this->content->text = $this->config->text;
+            $this->content->text = "Hello Pedro";
         } else {
             // $text = "<h6>". get_string('pluginname_display', 'block_listallcourses') ."</h6>";
 
-            $sql = "SELECT * FROM {course} WHERE id !=1";
+            $sql = "SELECT * FROM {course} WHERE id !=?";
+            $result = $DB->get_records_sql($sql, array(1));
 
-            $result = $DB->get_records_sql($sql);
+
+
 
             $table = "<table> <tbody>";
-            $table .= "<tr> 
+            $table .= "<tr class='header'> 
             <th>" . get_string('srn', 'block_listallcourses') . "</th>
             <th>" . get_string('course_name', 'block_listallcourses') . "</th>
             <th>" . get_string('course_id', 'block_listallcourses') . "</th>
@@ -75,7 +83,6 @@ class block_listallcourses extends block_base
 
             $counter = 1;
             foreach ($result as $course) {
-
                 $table .= "<tr> 
                 <td>" . $counter++ . "</td>
                 <td>" . $course->fullname . "</td>
@@ -85,9 +92,23 @@ class block_listallcourses extends block_base
 
             $table .= "</tbody></table>";
 
+            $filter1 = '
+            <div class="filter" >
+            <span class="header2" > Course Status: </span>
+            <select name="status" id="status">
+            <option value="-1">All</option>
+            <option value="1">Active</option>
+            <option value="0">Deactive</option>
+            </select>
+            </div>';
 
 
-            $text = $table;
+
+
+            $text  = $filter1;
+            $text .= "<div class='resultset'>";
+            $text .= $table;
+            $text .= "</div>";
             $this->content->text = $text;
         }
 
@@ -131,8 +152,17 @@ class block_listallcourses extends block_base
             'all' => true
         );
     }
+
+    function instance_allow_multiple() {
+        return true;
+}
+
     function _self_test()
     {
         return true;
     }
 }
+
+// how to send email in pph? 
+
+// generate select option filter in html?
