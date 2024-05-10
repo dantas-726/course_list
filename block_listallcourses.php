@@ -42,7 +42,7 @@ class block_listallcourses extends block_base
     public function get_content()
     {
 
-        global $DB, $USER, $CFG, $PAGE;
+        global $DB, $USER, $CFG, $PAGE, $OUTPUT;
 
         $PAGE->requires->js('/blocks/listallcourses/js/jquery-3.6.3.min.js');
         $PAGE->requires->js('/blocks/listallcourses/js/main.js');
@@ -70,9 +70,6 @@ class block_listallcourses extends block_base
 
             $sql = "SELECT * FROM {course} WHERE id !=?";
             $result = $DB->get_records_sql($sql, array(1));
-
-
-
 
             $table = "<table> <tbody>";
             $table .= "<tr class='header'> 
@@ -109,7 +106,17 @@ class block_listallcourses extends block_base
             $text .= "<div class='resultset'>";
             $text .= $table;
             $text .= "</div>";
+
+
             $this->content->text = $text;
+
+            /* Código usado para importar da template list.mustache
+            $records['data'] = array_values($result);
+            $this->content->text = $OUTPUT->render_from_template('block_listallcourses/list', $records);
+            
+            **/
+
+
         }
 
         return $this->content;
