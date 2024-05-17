@@ -28,6 +28,8 @@ defined('MOODLE_INTERNAL') || die();
 $string['course_id'] = 'Course ID';
 $string['course_name'] = 'Course Name';
 $string['pluginname'] = 'Listar todos os cursos';
+$string['listallcourses:addinstance'] = 'Adicionar listagem dos cursos';
+$string['listallcourses:myaddinstance'] = 'List all my add instance';
 $string['pluginname_display'] = 'Cursos abaixo:';
 $string['srn'] = 'Sr N.';
 

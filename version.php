@@ -26,6 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_listallcourses';
 $plugin->release = '0.1.0';
-$plugin->version = 2024051005;
+$plugin->version = 2024051600;
 $plugin->requires = 2020110901;
 $plugin->maturity = MATURITY_ALPHA;
